@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Rotating CSS Cube</title>
+</head>
+<body>
+    <div class="cube" id="cube">
+        <div class="side" id="one"><p class="num">1</p></div>
+        <div class="side" id="two"><p class="num">2</p></div>
+        <div class="side" id="three"><p class="num">3</p></div>
+        <div class="side" id="four"><p class="num">4</p></div>
+        <div class="side" id="five"><p class="num">5</p></div>
+        <div class="side" id="six"><p class="num">6</p></div>
+    </div>
+
+    <button id="display" onclick="switchDisplay()">Switch Display</button>
+    <button id="numbers" onclick="switchNumbers()">Hide/Show Numbers</button>
+    <button id="matrix" onclick="switchMatrix()">Matrix Mode</button>
+    <div id="stats" style="width: 100%">
+        <p id="x" style="color: rgb(3, 255, 37)">X Angle: </p>
+        <p id="y" style="color: rgb(3, 255, 37)">Y Angle: </p>
+        <p id="z" style="color: rgb(3, 255, 37)">Z Angle: </p>
+    </div>
+
+    <div id="speeds" style="width: 100%">
+        <hr style="float: left; color: rgb(3, 255, 37); width: 100px;">
+        <br>
+        <p style="color: rgb(3, 255, 37); font-weight: 600">Speeds</p>
+        <div>
+            <p style="color: rgb(3, 255, 37)">X Speed</p>
+            <input type="range" min="0" max="100" value="50" class="slider" id="xSpeed">
+        </div>
+        <div>
+            <p style="color: rgb(3, 255, 37)">Y Speed</p>
+            <input type="range" min="0" max="100" value="50" class="slider" id="ySpeed">
+        </div>
+        <div>
+            <p style="color: rgb(3, 255, 37)">Z Speed</p>
+            <input type="range" min="0" max="100" value="50" class="slider" id="zSpeed">
+        </div>
+    </div>
+
+    <br>
+    <div id="scale" style="width: 100%">
+        <hr style="float: left; color: rgb(3, 255, 37); width: 100px;">
+        <br>
+        <div>
+            <p style="color: rgb(3, 255, 37)">Scale</p>
+            <input type="range" min="1" max="100" value="20" class="slider" id="scaleBar">
+        </div>
+    </div>
+
+    <script src="code.js"></script> 
+</body>
+</html>
