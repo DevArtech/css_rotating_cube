@@ -22,6 +22,12 @@ const disScale = document.getElementById("scale");
 const scale = document.getElementById("scaleBar");
 disScale.style.setProperty("display", "none");
 
+const disAngle = document.getElementById("angle");
+const angleX = document.getElementById("xAngle");
+const angleY = document.getElementById("yAngle");
+const angleZ = document.getElementById("zAngle");
+disAngle.style.setProperty("display", "none");
+
 var x = 0;
 var y = 0;
 var z = 0;
@@ -47,9 +53,9 @@ const five = document.getElementById("five");
 const six = document.getElementById("six");
 
 
-var interval = setInterval(incrementX, 10);
-var interval = setInterval(incrementY, 10);
-var interval = setInterval(incrementZ, 10);
+var intervalX = setInterval(incrementX, 10);
+var intervalY = setInterval(incrementY, 10);
+var intervalZ = setInterval(incrementZ, 10);
 
 /**Rotation methods*/
 
@@ -59,6 +65,7 @@ function incrementX(){
         x = 0;
     }
     x = Math.round(x * 100) / 100
+    angleX.value = x;
     cube.style.setProperty("transform", "rotateX(" + x + "deg) rotateY(" + y + "deg) rotateZ(" + z + "deg)");
     disX.innerHTML = "X Angle: " + x;
 }
@@ -69,6 +76,7 @@ function incrementY() {
         y = 0;
     }
     y = Math.round(y* 100) / 100
+    angleY.value = y;
     cube.style.setProperty("transform", "rotateX(" + x + "deg) rotateY(" + y + "deg) rotateZ(" + z + "deg)");
     disY.innerHTML = "Y Angle: " + y;
 }
@@ -79,6 +87,7 @@ function incrementZ() {
         z = 0;
     }
     z = Math.round(z * 100) / 100
+    angleZ.value = z;
     cube.style.setProperty("transform", "rotateX(" + x + "deg) rotateY(" + y + "deg) rotateZ(" + z + "deg)");
     disZ.innerHTML = "Z Angle: " + z;
 }
@@ -135,6 +144,7 @@ function dashedToSolid() {
     } else {
         for (const side of sides) {
             side.style.setProperty("border", "1px solid rgb(3, 255, 37)");
+            side.style.setProperty("background", "black");
         }  
     }
     dashed = false;
@@ -166,6 +176,8 @@ function showNumbers() {
 }
 
 /**Methods to enable/display Matrix Mode (For fun) */
+
+var numInterval;
 
 function matrixMode() {
     matrix = true;
@@ -200,6 +212,11 @@ function matrixMode() {
     disStats.style.setProperty("display", "block");
     disSpeeds.style.setProperty("display", "block");
     disScale.style.setProperty("display", "block");
+    disAngle.style.setProperty("display", "block");
+
+    numInterval = setInterval(function() {
+        createNumber();
+      }, 1);
 }
 
 function noMatrix() {
@@ -235,6 +252,9 @@ function noMatrix() {
     disStats.style.setProperty("display", "none");
     disSpeeds.style.setProperty("display", "none");
     disScale.style.setProperty("display", "none");
+    disAngle.style.setProperty("display", "none");
+
+    clearInterval(numInterval);
 }
 
 /** Update Speed values from sliders */
@@ -275,20 +295,131 @@ function changeZ() {
     console.log(zSpeed);
 }
 
+/** Create random falling 1s and 0s for matrix mode */
+
+function createNumber() {
+    const newBar = document.getElementById("new");
+    var num = document.createElement("p");
+    num.style.width = 0;
+    num.style.height = 0;
+    num.style.top = "-5vh";
+    num.style.position = "absolute";
+    num.style.left = (Math.random() * 1920) + "px";
+    num.style.pointerEvents = "none";
+    num.style.color = "rgb(3, 255, 37, 0.1)";
+    num.style.zIndex = "-999";
+    num.setAttribute("class", "fall");
+    var i = Math.round(Math.random());
+    if(i == 0) {
+        num.innerHTML = "0";
+    } else {
+        num.innerHTML = "1";
+    }
+    newBar.appendChild(num);
+
+    sepInterval = setInterval(function() {
+        num.remove();
+      }, 2000);
+}
+
+/** Set Angle X of Cube */
+
+if (angleX.addEventListener) {
+    angleX.addEventListener("mouseover", function() { setInterval(setAngleX, 5) }, false);
+}
+else if (angleX.attachEvent) {
+    angleX.attachEvent('mouseover', function() { setInterval(setAngleX, 5) });
+}
+
+if (angleX.addEventListener) {
+    angleX.addEventListener("mouseout", function() {clearInterval(setAngleX) }, false);
+}
+else if (angleX.attachEvent) {
+    angleX.attachEvent('mouseout', function() { clearInterval(setAngleX) });
+}
+
+function setAngleX() {
+    if(xSpeed <= 0) {
+        x = angleX.value;
+        if(x >= 360) {
+            x = 0;
+        }
+        x = Math.round(x * 100) / 100
+        cube.style.setProperty("transform", "rotateX(" + x + "deg) rotateY(" + y + "deg) rotateZ(" + z + "deg)");
+        disX.innerHTML = "X Angle: " + x;
+    }
+}
+
+/** Set Angle Y of Cube */
+
+if (angleY.addEventListener) {
+    angleY.addEventListener("mouseover", function() { setInterval(setAngleY, 5) }, false);
+}
+else if (angleY.attachEvent) {
+    angleY.attachEvent('mouseover', function() { setInterval(setAngleY, 5) });
+}
+
+if (angleY.addEventListener) {
+    angleY.addEventListener("mouseout", function() { clearInterval(setAngleY) }, false);
+}
+else if (angleY.attachEvent) {
+    angleY.attachEvent('mouseout', function() { clearInterval(setAngleY) });
+}
+
+function setAngleY() {
+    if(ySpeed <= 0) {
+        y = angleY.value;
+        if(y >= 360) {
+            y = 0;
+        }
+        y = Math.round(y * 100) / 100
+        cube.style.setProperty("transform", "rotateX(" + x + "deg) rotateY(" + y + "deg) rotateZ(" + z + "deg)");
+        disY.innerHTML = "Y Angle: " + y;
+    }
+}
+
+/** Set Angle Z of Cube */
+
+if (angleZ.addEventListener) {
+    angleZ.addEventListener("mouseover", function() { setInterval(setAngleZ, 5) }, false);
+}
+else if (angleZ.attachEvent) {
+    angleZ.attachEvent('mouseover', function() { setInterval(setAngleZ, 5) });
+}
+
+if (angleZ.addEventListener) {
+    angleZ.addEventListener("mouseout", function() { clearInterval(setAngleZ) }, false);
+}
+else if (angleZ.attachEvent) {
+    angleZ.attachEvent('mouseout', function() { clearInterval(setAngleZ) });
+}
+
+function setAngleZ() {
+    if(zSpeed <= 0) {
+        z = angleZ.value;
+        if(z >= 360) {
+            z = 0;
+        }
+        z = Math.round(z * 100) / 100
+        cube.style.setProperty("transform", "rotateX(" + x + "deg) rotateY(" + y + "deg) rotateZ(" + z + "deg)");
+        disY.innerHTML = "Z Angle: " + z;
+    }
+}
+
 /**Update Scale of Cube */
 
 if (scale.addEventListener) {
-    scale.addEventListener("mouseover", setInterval(changeScale, 5), false);
+    scale.addEventListener("mouseover", function() { setInterval(changeScale, 5) }, false);
 }
 else if (scale.attachEvent) {
-    scale.attachEvent('mouseover', setInterval(changeScale, 5));
+    scale.attachEvent('mouseover', function() { setInterval(changeScale, 5) });
 }
 
 if (scale.addEventListener) {
-    scale.addEventListener("mouseout", clearInterval(changeScale), false);
+    scale.addEventListener("mouseout", function() { clearInterval(changeScale) }, false);
 }
 else if (scale.attachEvent) {
-    scale.attachEvent('mouseout', clearInterval(changeScale));
+    scale.attachEvent('mouseout', function() { clearInterval(changeScale) });
 }
 
 function changeScale() {

@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+body {
+    overflow: hidden;
+}
+
 p {
     font-family: 'Roboto', sans-serif;
 }
@@ -73,15 +77,15 @@ p {
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s;
     border-radius: 5px;
-  }
+}
   
-  /* Mouse-over effects */
-  .slider:hover {
+/* Mouse-over effects */
+.slider:hover {
     opacity: 1; /* Fully shown on mouse-over */
-  }
+}
   
-  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-  .slider::-webkit-slider-thumb {
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
     width: 20px; /* Set a specific slider handle width */
@@ -89,13 +93,21 @@ p {
     border-radius: 100%;
     background: rgb(3, 255, 37); /* Green background */
     cursor: pointer; /* Cursor on hover */
-  }
+}
   
-  .slider::-moz-range-thumb {
+.slider::-moz-range-thumb {
     width: 20px; /* Set a specific slider handle width */
     height: 20px; /* Slider handle height */
     border-radius: 100%;
     background: rgb(3, 255, 37); /* Green background */
     cursor: pointer; /* Cursor on hover */
-  }
+}
+
+.fall {
+    animation: dropNum 5s forwards .2s;
+    -moz-animation: dropNum 5s forwards .2s;
+}
+
+@-moz-keyframes dropNum { from { transform: translate(-5vh); } to { transform: translateY(200vh); } }
+@keyframes dropNum { from { transform: translate(-5vh); } to { transform: translateY(200vh); } }
   

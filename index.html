@@ -8,7 +8,8 @@
     <title>Rotating CSS Cube</title>
 </head>
 <body>
-    <div class="cube" id="cube">
+    <div id="new" style="width: 0; height: 0;"></div>
+    <div class="cube" style="z-index: 0" id="cube">
         <div class="side" id="one"><p class="num">1</p></div>
         <div class="side" id="two"><p class="num">2</p></div>
         <div class="side" id="three"><p class="num">3</p></div>
@@ -17,16 +18,16 @@
         <div class="side" id="six"><p class="num">6</p></div>
     </div>
 
-    <button id="display" onclick="switchDisplay()">Switch Display</button>
-    <button id="numbers" onclick="switchNumbers()">Hide/Show Numbers</button>
-    <button id="matrix" onclick="switchMatrix()">Matrix Mode</button>
+    <button id="display" style="z-index: 10" onclick="switchDisplay()">Switch Display</button>
+    <button id="numbers" style="z-index: 10" onclick="switchNumbers()">Hide/Show Numbers</button>
+    <button id="matrix" style="z-index: 10" onclick="switchMatrix()">Matrix Mode</button>
     <div id="stats" style="width: 100%">
         <p id="x" style="color: rgb(3, 255, 37)">X Angle: </p>
         <p id="y" style="color: rgb(3, 255, 37)">Y Angle: </p>
         <p id="z" style="color: rgb(3, 255, 37)">Z Angle: </p>
     </div>
 
-    <div id="speeds" style="width: 100%">
+    <div id="speeds" style="z-index: 10; width: 100%">
         <hr style="float: left; color: rgb(3, 255, 37); width: 100px;">
         <br>
         <p style="color: rgb(3, 255, 37); font-weight: 600">Speeds</p>
@@ -45,12 +46,31 @@
     </div>
 
     <br>
-    <div id="scale" style="width: 100%">
+    <div id="scale" style="z-index: 10; width: 100%">
         <hr style="float: left; color: rgb(3, 255, 37); width: 100px;">
         <br>
         <div>
             <p style="color: rgb(3, 255, 37)">Scale</p>
             <input type="range" min="1" max="100" value="20" class="slider" id="scaleBar">
+        </div>
+    </div>
+
+    <br>
+    <div id="angle" style="z-index: 10; width: 100%">
+        <hr style="float: left; color: rgb(3, 255, 37); width: 100px;">
+        <br>
+        <p style="color: rgb(3, 255, 37); font-weight: 600">Set Angle</p>
+        <div>
+            <p style="color: rgb(3, 255, 37)">X Angle</p>
+            <input type="range" min="1" max="360" value="1" class="slider" id="xAngle">
+        </div>
+        <div>
+            <p style="color: rgb(3, 255, 37)">Y Angle</p>
+            <input type="range" min="1" max="360" value="1" class="slider" id="yAngle">
+        </div>
+        <div>
+            <p style="color: rgb(3, 255, 37)">Z Angle</p>
+            <input type="range" min="1" max="360" value="1" class="slider" id="zAngle">
         </div>
     </div>
 
